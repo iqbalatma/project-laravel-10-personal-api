@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Iqbalatma\LaravelServiceRepo\ServiceRepoProvider::class,
 
         /*
          * Application Service Providers...
