@@ -2,17 +2,19 @@
 
 namespace App\Traits;
 
+use App\Console\Commands\GenerateEnum;
+use App\Console\Commands\GenerateTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
 trait MakeCommand
 {
-    protected string $argumentName;
-    protected string $className;
-    protected string $targetPath;
-    protected string $filename;
-    protected string $namespace;
-    protected Filesystem $filesystem;
+    private string $argumentName;
+    private string $className;
+    private string $targetPath;
+    private string $filename;
+    private string $namespace;
+    private Filesystem $filesystem;
 
     /**
      * @return Command
@@ -23,9 +25,9 @@ trait MakeCommand
     }
 
     /**
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    protected function setArgumentName(): self
+    protected function setArgumentName(): static
     {
         $this->argumentName = $this->getConsoleInstance()->argument("name");
         return $this;
@@ -40,9 +42,9 @@ trait MakeCommand
     }
 
     /**
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    protected function setClassName(): self
+    protected function setClassName(): static
     {
         $this->className = ucwords(last(explode("/", $this->getArgumentName())));
         return $this;
@@ -58,9 +60,9 @@ trait MakeCommand
 
     /**
      * @param string $targetPath
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    protected function setTargetPath(string $targetPath): self
+    protected function setTargetPath(string $targetPath): static
     {
         $this->targetPath = $targetPath;
 
@@ -84,9 +86,9 @@ trait MakeCommand
     }
 
     /**
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    protected function setFilename(): self
+    protected function setFilename(): static
     {
         $this->filename = $this->getTargetPath() . "/" . $this->getClassName() . ".php";
         return $this;
@@ -102,14 +104,14 @@ trait MakeCommand
 
     /**
      * @param string $defaultNamespace
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    private function setNamespace(string $defaultNamespace): self
+    private function setNamespace(string $defaultNamespace): static
     {
         $this->namespace = $defaultNamespace;
-        if (($dirname = dirname($this->getArgumentName())) !== "."){
+        if (($dirname = dirname($this->getArgumentName())) !== ".") {
             $dirname = str_replace("/", "\\", $dirname);
-            $this->namespace .="\\$dirname";
+            $this->namespace .= "\\$dirname";
         }
 
         return $this;
@@ -118,15 +120,15 @@ trait MakeCommand
     /**
      * @return string
      */
-    protected function getNamespace():string
+    protected function getNamespace(): string
     {
         return $this->namespace;
     }
 
     /**
-     * @return Command|MakeCommand
+     * @return MakeCommand
      */
-    protected function makeDirectory(): self
+    protected function makeDirectory(): static
     {
         $this->filesystem = new Filesystem();
 
@@ -136,8 +138,29 @@ trait MakeCommand
         return $this;
     }
 
-    protected abstract function getStubVariables():array;
+    /**
+     * @return array
+     */
+    protected abstract function getStubVariables(): array;
 
+    /**
+     * @param string $stubFilePath
+     * @return void
+     */
+    protected function generateFromStub(string $stubFilePath): void
+    {
+        if (!$this->filesystem->exists($this->getFilename())) {
+            $this->filesystem->put($this->getFilename(), $this->getFileContent(self::STUB_FILE_PATH));
+            $this->info("Create " . $this->getClassName() . " sucessfully");
+        } else {
+            $this->error($this->className . " already exists");
+        }
+    }
+
+    /**
+     * @param string $stubPath
+     * @return string
+     */
     protected function getFileContent(string $stubPath): string
     {
         $stubContent = file_get_contents($stubPath);
@@ -148,7 +171,12 @@ trait MakeCommand
         return $stubContent;
     }
 
-    protected function prepareMakeCommand(string $targetPath, string $defaultNamespace):self
+    /**
+     * @param string $targetPath
+     * @param string $defaultNamespace
+     * @return $this
+     */
+    protected function prepareMakeCommand(string $targetPath, string $defaultNamespace): static
     {
         $this->setArgumentName()
             ->setClassName()
@@ -159,5 +187,6 @@ trait MakeCommand
 
         return $this;
     }
+
 
 }

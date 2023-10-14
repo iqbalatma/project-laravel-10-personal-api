@@ -30,7 +30,7 @@ class GenerateEnum extends Command
     public function handle():void
     {
         $this->prepareMakeCommand(app_path("Enums"), "App\\Enums")
-            ->generateFromStub();
+            ->generateFromStub(self::STUB_FILE_PATH);
     }
 
     /**
@@ -43,16 +43,4 @@ class GenerateEnum extends Command
             "NAMESPACE" => $this->getNamespace()
         ];
     }
-
-    private function generateFromStub(): void
-    {
-        if (!$this->filesystem->exists($this->getFilename())) {
-            $this->filesystem->put($this->getFilename(), $this->getFileContent(self::STUB_FILE_PATH));
-            $this->info("Create " . $this->getClassName() . " sucessfully");
-        } else {
-            $this->error($this->className . " already exists");
-        }
-    }
-
-
 }
