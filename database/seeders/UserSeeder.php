@@ -9,7 +9,8 @@ class UserSeeder extends Seeder
 {
     public const DATA_USER = [
         [
-            "name" => "superadmin",
+            "firstname" => "superadmin",
+            "lastname" => null,
             "password" => "admin",
             "email" => "superadmin@mail.com",
             "phone_number" => "+62895351172040",
