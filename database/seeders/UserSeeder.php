@@ -16,6 +16,13 @@ class UserSeeder extends Seeder
             "phone_number" => "+62895351172040",
             "phone_number_verified_at" => "2023-10-14",
             "email_verified_at" => "2023-10-14",
+            "profile" => [
+                "address" => "Bandung",
+                "gender" => "male",
+                "avatar" => null,
+                "birth_date" => "1999-02-16",
+                "birth_place" => "bandung",
+            ]
         ]
     ];
 
@@ -25,7 +32,16 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         foreach (self::DATA_USER as $user) {
-            User::create($user);
+            $profile = null;
+            if (isset($user["profile"])) {
+                $profile = $user["profile"];
+                unset($user["profile"]);
+            }
+            $user = User::create($user);
+
+            if ($profile){
+                $user->profile()->create($profile);
+            }
         }
     }
 }
