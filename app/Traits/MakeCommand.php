@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Console\Commands\GenerateEnum;
-use App\Console\Commands\GenerateTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -29,7 +27,7 @@ trait MakeCommand
      */
     protected function setArgumentName(): static
     {
-        $this->argumentName = $this->getConsoleInstance()->argument("name");
+        $this->argumentName = ucwords($this->getConsoleInstance()->argument("name"));
         return $this;
     }
 
@@ -72,6 +70,7 @@ trait MakeCommand
          * but if argument is nested, we will create new directory with nest path
          */
         if (($dirname = dirname($this->getArgumentName())) !== ".") {
+            $dirname = ucwords($dirname);
             $this->targetPath .= "/$dirname";
         }
         return $this;
@@ -110,7 +109,7 @@ trait MakeCommand
     {
         $this->namespace = $defaultNamespace;
         if (($dirname = dirname($this->getArgumentName())) !== ".") {
-            $dirname = str_replace("/", "\\", $dirname);
+            $dirname = ucwords(str_replace("/", "\\", $dirname));
             $this->namespace .= "\\$dirname";
         }
 
