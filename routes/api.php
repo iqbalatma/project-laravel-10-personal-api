@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\Admin\Management\PermissionController;
+use App\Http\Controllers\API\V1\Admin\Management\RoleController;
 use App\Http\Controllers\API\V1\Admin\Management\UserController;
 use App\Http\Controllers\API\V1\Auth\AuthenticationController;
 use Illuminate\Http\Request;
@@ -36,6 +37,11 @@ Route::prefix("v1")->name("v1.")->group(function () {
 
                 Route::prefix("permissions")->name("permissions.")->controller(PermissionController::class)->group(function () {
                     Route::get("", "index")->name("index");
+                });
+
+                Route::prefix("roles")->name("roles.")->controller(RoleController::class)->group(function () {
+                    Route::get("", "index")->name("index");
+                    Route::get("{id}", "show")->name("show");
                 });
             });
         });

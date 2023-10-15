@@ -42,6 +42,7 @@ trait APIResponse
         Error|Exception|Throwable|null                                                            $exception = null
     ): APIResponseData
     {
+
         return new APIResponseData($data, $message, $responseCode, $exception);
     }
 }

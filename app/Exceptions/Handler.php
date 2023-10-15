@@ -4,11 +4,14 @@ namespace App\Exceptions;
 
 use App\Enums\ResponseCode;
 use App\Traits\APIResponse;
+use Error;
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use function Laravel\Prompts\password;
 
 class Handler extends ExceptionHandler
 {
@@ -63,7 +66,9 @@ class Handler extends ExceptionHandler
             );
         });
 
-        $this->renderable(function (Throwable|\Exception $e) {
+
+
+        $this->renderable(function (Throwable|Exception $e) {
             return $this->apiResponse(
                 message: config("app.env") === "production" ? "Something went wrong" : $e->getMessage(),
                 responseCode: ResponseCode::ERR_INTERNAL_SERVER_ERROR,

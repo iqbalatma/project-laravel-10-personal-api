@@ -26,8 +26,6 @@ class PermissionController extends Controller
      */
     public function index(PermissionService $service):APIResponse
     {
-        throw new NotFoundHttpException();
-
         $response = $service->getAllDataPaginated();
 
         return $this->apiResponse(
