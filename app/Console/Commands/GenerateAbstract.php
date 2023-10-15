@@ -23,7 +23,7 @@ class GenerateAbstract extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Create a new abstract class';
 
     /**
      * Execute the console command.

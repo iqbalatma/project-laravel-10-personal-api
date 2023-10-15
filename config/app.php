@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         Iqbalatma\LaravelServiceRepo\ServiceRepoProvider::class,
+        Iqbalatma\LaravelJwtAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
