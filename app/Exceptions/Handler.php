@@ -7,6 +7,7 @@ use App\Traits\APIResponse;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -61,7 +62,6 @@ class Handler extends ExceptionHandler
                 $e
             );
         });
-
 
         $this->renderable(function (Throwable|\Exception $e) {
             return $this->apiResponse(

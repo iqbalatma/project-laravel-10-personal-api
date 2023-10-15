@@ -6,27 +6,23 @@ use App\Enums\ResponseCode;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\CursorPaginator;
-use Illuminate\Support\Facades\Log;
-use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 use Symfony\Component\HttpFoundation\Response;
 
 class APIResponse implements Responsable
 {
     protected array $baseFormat;
-
     protected const PAYLOAD_WRAPPER = "payload";
 
     public function __construct(
         protected JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null $data,
         protected ?string                                                                                   $message,
         protected ResponseCode                                                                              $responseCode,
-        \Error|\Exception|\Throwable|null                                                                   $error = null
+        protected \Error|\Exception|\Throwable|null                                                         $error = null
     )
     {
         $this->baseFormat = [
@@ -36,12 +32,15 @@ class APIResponse implements Responsable
             "payload" => null
         ];
 
+
         if (($error instanceof \Throwable) && config("app.env") !== "production" && config("app.debug") === true) {
             $this->baseFormat["exception"] = [
+                "name" => get_class($this->error),
                 "message" => $error->getMessage(),
+                "http_code" => $this->getHttpCode(),
+                "code" => $error->getCode(),
                 "file" => $error->getFile(),
                 "line" => $error->getLine(),
-                "code" => $error->getCode(),
                 "trace" => $error->getTrace(),
             ];
         }
@@ -52,6 +51,14 @@ class APIResponse implements Responsable
      */
     protected function getResponseCode(): ResponseCode
     {
+        if ($this->error) {
+            $httpCode = (string)$this->getHttpCode();
+            if (str_starts_with($httpCode, "5")) {
+                return ResponseCode::ERR_INTERNAL_SERVER_ERROR;
+            } elseif (str_starts_with($httpCode, "4")) {
+                return ResponseCode::ERR_BAD_REQUEST;
+            }
+        }
         return $this->responseCode;
     }
 
@@ -77,6 +84,9 @@ class APIResponse implements Responsable
      */
     protected function getHttpCode(): int
     {
+        if ($this->error && method_exists($this->error, "getStatusCode")) {
+            return $this->error->getStatusCode();
+        }
         return $this->getResponseCode()->httpCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR;
     }
 

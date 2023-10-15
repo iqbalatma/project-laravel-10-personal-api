@@ -9,6 +9,8 @@ enum ResponseCode {
     case ERR_UNAUTHENTICATED;
     case ERR_ENTITY_NOT_FOUND;
     case ERR_INTERNAL_SERVER_ERROR;
+    case ERR_BAD_REQUEST;
+    case ERR_UNKNOWN;
 
     public function httpCode(): int
     {
@@ -16,7 +18,8 @@ enum ResponseCode {
             self::SUCCESS => Response::HTTP_OK,
             self::ERR_UNAUTHENTICATED => Response::HTTP_UNAUTHORIZED,
             self::ERR_ENTITY_NOT_FOUND => Response::HTTP_NOT_FOUND,
-            self::ERR_INTERNAL_SERVER_ERROR => Response::HTTP_INTERNAL_SERVER_ERROR,
+            self::ERR_INTERNAL_SERVER_ERROR, self::ERR_UNKNOWN => Response::HTTP_INTERNAL_SERVER_ERROR,
+            self::ERR_BAD_REQUEST => Response::HTTP_BAD_REQUEST,
 
             default => Response::HTTP_BAD_REQUEST
         };
