@@ -39,8 +39,8 @@ trait APIResponse
         JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null $data = null,
         ?string                                                                                   $message = "Success",
         ?ResponseCode                                                                             $responseCode = ResponseCode::SUCCESS,
-        Error|Exception|Throwable|null $exception = null
-    ):APIResponseData
+        Error|Exception|Throwable|null                                                            $exception = null
+    ): APIResponseData
     {
         return new APIResponseData($data, $message, $responseCode, $exception);
     }

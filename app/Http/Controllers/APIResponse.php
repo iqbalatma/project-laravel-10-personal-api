@@ -6,11 +6,14 @@ use App\Enums\ResponseCode;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\CursorPaginator;
+use Illuminate\Support\Facades\Log;
+use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 use Symfony\Component\HttpFoundation\Response;
 
 class APIResponse implements Responsable
@@ -23,7 +26,7 @@ class APIResponse implements Responsable
         protected JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null $data,
         protected ?string                                                                                   $message,
         protected ResponseCode                                                                              $responseCode,
-        \Error|\Exception|\Throwable|null                                                                   $exception = null
+        \Error|\Exception|\Throwable|null                                                                   $error = null
     )
     {
         $this->baseFormat = [
@@ -33,18 +36,15 @@ class APIResponse implements Responsable
             "payload" => null
         ];
 
-        /**
-         * Todo : exception handling
-         */
-//        if (!is_null($exception) && ($exception instanceof \Error || $exception instanceof \Exception || $exception instanceof \Throwable) && config("app.env") !== "production" && config("app.debug") === true) {
-//            $this->baseFormat["exception"] = [
-//                "message" => $exception->getMessage(),
-//                "file" => $exception->getFile(),
-//                "line" => $exception->getLine(),
-//                "code" => $exception->getCode(),
-//                "trace" => $exception->getTrace(),
-//            ];
-//        }
+        if (($error instanceof \Throwable) && config("app.env") !== "production" && config("app.debug") === true) {
+            $this->baseFormat["exception"] = [
+                "message" => $error->getMessage(),
+                "file" => $error->getFile(),
+                "line" => $error->getLine(),
+                "code" => $error->getCode(),
+                "trace" => $error->getTrace(),
+            ];
+        }
     }
 
     /**
