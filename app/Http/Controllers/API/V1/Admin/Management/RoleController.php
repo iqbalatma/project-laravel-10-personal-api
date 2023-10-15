@@ -17,6 +17,7 @@ class RoleController extends Controller
         $this->responseMessages = [
             "index" => "Get all data role paginated successfully",
             "indexAll" => "Get all data role successfully",
+            "show" => "Get data role by id successfully",
         ];
     }
 
