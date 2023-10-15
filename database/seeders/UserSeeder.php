@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -44,7 +45,10 @@ class UserSeeder extends Seeder
             }
         }
 
+        $userSuperadmin = User::where("email", "superadmin@mail.com")->first();
+        $userSuperadmin->assignRole(Role::SUPERADMIN->value);
 
         User::factory()->count(100)->create();
+
     }
 }
