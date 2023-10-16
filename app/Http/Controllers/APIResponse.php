@@ -56,15 +56,18 @@ class APIResponse implements Responsable
     protected function getResponseCode(): ResponseCode
     {
         if (is_null($this->responseCode)) {
-            if ($this->error instanceof HttpExceptionInterface) {
-                $httpCode = (string)$this->error->getStatusCode();
-                if (str_starts_with($httpCode, "5")) {
-                    return ResponseCode::ERR_INTERNAL_SERVER_ERROR;
-                } elseif (str_starts_with($httpCode, "4")) {
-                    return ResponseCode::ERR_BAD_REQUEST;
-                } else {
-                    return ResponseCode::ERR_UNKNOWN;
+            if ($this->error) {
+                if ($this->error instanceof HttpExceptionInterface) {
+                    $httpCode = (string)$this->error->getStatusCode();
+                    if (str_starts_with($httpCode, "5")) {
+                        return ResponseCode::ERR_INTERNAL_SERVER_ERROR;
+                    } elseif (str_starts_with($httpCode, "4")) {
+                        return ResponseCode::ERR_BAD_REQUEST;
+                    } else {
+                        return ResponseCode::ERR_UNKNOWN;
+                    }
                 }
+                return ResponseCode::ERR_UNKNOWN;
             }
             return ResponseCode::SUCCESS;
         }
@@ -76,7 +79,8 @@ class APIResponse implements Responsable
     /**
      * @return JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null
      */
-    protected function getData(): JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null
+    protected
+    function getData(): JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null
     {
         return $this->data;
     }
@@ -84,7 +88,8 @@ class APIResponse implements Responsable
     /**
      * @return string
      */
-    protected function getMessage(): string
+    protected
+    function getMessage(): string
     {
         return $this->message ?? "";
     }
@@ -92,7 +97,8 @@ class APIResponse implements Responsable
     /**
      * @return int
      */
-    protected function getHttpCode(): int
+    protected
+    function getHttpCode(): int
     {
         if ($this->error instanceof HttpExceptionInterface) {
             return $this->error->getStatusCode();
@@ -104,7 +110,8 @@ class APIResponse implements Responsable
     /**
      * @return array
      */
-    protected function getBaseFormat(): array
+    protected
+    function getBaseFormat(): array
     {
         return $this->baseFormat;
     }
@@ -112,7 +119,8 @@ class APIResponse implements Responsable
     /**
      * @return array
      */
-    private function getFormattedResponse(): array
+    private
+    function getFormattedResponse(): array
     {
         if ($this->getData() instanceof Paginator) {
             return array_merge($this->getBaseFormat(), [self::PAYLOAD_WRAPPER => $this->getData()->toArray()]);
@@ -140,7 +148,8 @@ class APIResponse implements Responsable
      * @param $request
      * @return Response
      */
-    public function toResponse($request): Response
+    public
+    function toResponse($request): Response
     {
         return response()->json($this->getFormattedResponse(), $this->getHttpCode());
     }

@@ -7,6 +7,7 @@ use App\Traits\APIResponse;
 use Error;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -74,8 +75,14 @@ class Handler extends ExceptionHandler
             );
         });
 
-
-
+        $this->renderable(function (UniqueConstraintViolationException $e){
+            return $this->apiResponse(
+                null,
+                "Error unique validation exception",
+                ResponseCode::ERR_VALIDATION,
+                $e
+            );
+        });
 
 
         $this->renderable(function (Throwable|Exception $e) {

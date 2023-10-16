@@ -8,6 +8,7 @@ use App\Http\Requests\V1\Admin\Management\Roles\StoreRoleRequest;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResource;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResourceCollection;
 use App\Services\Admin\Management\RoleService;
+use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 
 class RoleController extends Controller
 {
@@ -19,6 +20,7 @@ class RoleController extends Controller
             "index" => "Get all data role paginated successfully",
             "indexAll" => "Get all data role successfully",
             "show" => "Get data role by id successfully",
+            "store" => "Add new data role successfully",
         ];
     }
 
@@ -40,6 +42,7 @@ class RoleController extends Controller
      * @param RoleService $service
      * @param string $id
      * @return APIResponse
+     * @throws EmptyDataException
      */
     public function show(RoleService $service, string $id): APIResponse
     {
