@@ -8,6 +8,7 @@ use App\Http\Requests\V1\Admin\Management\Roles\StoreRoleRequest;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResource;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResourceCollection;
 use App\Services\Admin\Management\RoleService;
+use App\Services\GeneralReplacement\ReplacementService;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 
 class RoleController extends Controller
@@ -46,6 +47,11 @@ class RoleController extends Controller
      */
     public function show(RoleService $service, string $id): APIResponse
     {
+        ddapi(ReplacementService::execute("Halo rekan-rekan {company} saya adalah {name}", [
+//            "company" =>"Mumtaz"
+        ]));
+
+
         $response = $service->getDataBy($id);
 
         return $this->apiResponse(
