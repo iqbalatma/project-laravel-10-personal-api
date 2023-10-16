@@ -43,6 +43,7 @@ Route::prefix("v1")->name("v1.")->group(function () {
                     Route::get("", "index")->name("index");
                     Route::get("{id}", "show")->name("show");
                     Route::post("", "store")->name("store");
+                    Route::patch("{id}", "update")->name("update");
                 });
             });
         });

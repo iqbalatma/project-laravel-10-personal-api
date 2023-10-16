@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V1\Admin\Management\Roles;
 
+use App\Enums\Table;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRoleRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "max:128",
+            "guard_name" => "max:128",
+            "permission_ids" => "nullable|array",
+            "permission_ids.*" => "exists:".Table::PERMISSIONS->value.",id",
         ];
     }
 }

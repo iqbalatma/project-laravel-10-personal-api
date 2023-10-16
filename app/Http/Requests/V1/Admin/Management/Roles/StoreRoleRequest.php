@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V1\Admin\Management\Roles;
 
+use App\Enums\Table;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRoleRequest extends FormRequest
@@ -24,7 +25,8 @@ class StoreRoleRequest extends FormRequest
         return [
             "name" => "required|max:128",
             "guard_name" => "max:128",
-            "is_mutable" => "required|bool"
+            "permission_ids" => "nullable|array",
+            "permission_ids.*" => "exists:".Table::PERMISSIONS->value.",id",
         ];
     }
 }
