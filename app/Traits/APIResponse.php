@@ -37,12 +37,11 @@ trait APIResponse
      */
     public function apiResponse(
         JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null $data = null,
-        ?string                                                                                   $message = "Success",
-        ?ResponseCode                                                                             $responseCode = ResponseCode::SUCCESS,
+        ?string                                                                                   $message = null,
+        ?ResponseCode                                                                             $responseCode = null,
         Error|Exception|Throwable|null                                                            $exception = null
     ): APIResponseData
     {
-
         return new APIResponseData($data, $message, $responseCode, $exception);
     }
 }

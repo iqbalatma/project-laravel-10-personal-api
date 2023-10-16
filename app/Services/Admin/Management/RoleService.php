@@ -5,6 +5,7 @@ use App\Contracts\Abstracts\Services\BaseService;
 use App\Models\Role;
 use App\Repositories\RoleRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 
 class RoleService extends BaseService
 {
@@ -26,9 +27,23 @@ class RoleService extends BaseService
     /**
      * @param string $id
      * @return Role
+     * @throws EmptyDataException
      */
-    public function getDataBy(string $id)
+    public function getDataBy(string $id): Role
     {
-        return RoleRepository::getSingleData(["id" =>$id]);
+        $role = RoleRepository::getSingleData(["id" =>$id]);
+        if (!$role){
+            throw new EmptyDataException();
+        }
+        return $role;
+    }
+
+    /**
+     * @param array $requestedData
+     * @return Role
+     */
+    public function addNewData(array $requestedData):Role
+    {
+        return RoleRepository::addNewData($requestedData);
     }
 }

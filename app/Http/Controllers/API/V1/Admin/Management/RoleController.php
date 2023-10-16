@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1\Admin\Management;
 
 use App\Http\Controllers\APIResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\Admin\Management\Roles\StoreRoleRequest;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResource;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResourceCollection;
 use App\Services\Admin\Management\RoleService;
@@ -25,7 +26,7 @@ class RoleController extends Controller
      * @param RoleService $service
      * @return APIResponse
      */
-    public function index(RoleService $service):APIResponse
+    public function index(RoleService $service): APIResponse
     {
         $response = $service->getAllDataPaginated();
 
@@ -40,9 +41,25 @@ class RoleController extends Controller
      * @param string $id
      * @return APIResponse
      */
-    public function show(RoleService $service, string $id)
+    public function show(RoleService $service, string $id): APIResponse
     {
         $response = $service->getDataBy($id);
+
+        return $this->apiResponse(
+            new RoleResource($response),
+            $this->getResponseMessage(__FUNCTION__)
+        );
+    }
+
+
+    /**
+     * @param RoleService $service
+     * @param StoreRoleRequest $request
+     * @return APIResponse
+     */
+    public function store(RoleService $service, StoreRoleRequest $request): APIResponse
+    {
+        $response = $service->addNewData($request->validated());
 
         return $this->apiResponse(
             new RoleResource($response),

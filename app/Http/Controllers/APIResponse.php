@@ -25,7 +25,7 @@ class APIResponse implements Responsable
     public function __construct(
         protected JsonResource|ResourceCollection|Arrayable|LengthAwarePaginator|CursorPaginator|array|null $data,
         protected ?string                                                                                   $message,
-        protected ResponseCode                                                                              $responseCode,
+        protected ?ResponseCode                                                                             $responseCode,
         protected Error|Exception|Throwable|null                                                            $error = null
     )
     {
@@ -55,14 +55,20 @@ class APIResponse implements Responsable
      */
     protected function getResponseCode(): ResponseCode
     {
-        if ($this->error instanceof HttpExceptionInterface) {
-            $httpCode = (string)$this->error->getStatusCode();
-            if (str_starts_with($httpCode, "5")) {
-                return ResponseCode::ERR_INTERNAL_SERVER_ERROR;
-            } elseif (str_starts_with($httpCode, "4")) {
-                return ResponseCode::ERR_BAD_REQUEST;
+        if (is_null($this->responseCode)) {
+            if ($this->error instanceof HttpExceptionInterface) {
+                $httpCode = (string)$this->error->getStatusCode();
+                if (str_starts_with($httpCode, "5")) {
+                    return ResponseCode::ERR_INTERNAL_SERVER_ERROR;
+                } elseif (str_starts_with($httpCode, "4")) {
+                    return ResponseCode::ERR_BAD_REQUEST;
+                } else {
+                    return ResponseCode::ERR_UNKNOWN;
+                }
             }
+            return ResponseCode::SUCCESS;
         }
+
         return $this->responseCode;
     }
 
@@ -80,7 +86,7 @@ class APIResponse implements Responsable
      */
     protected function getMessage(): string
     {
-        return $this->message;
+        return $this->message ?? "";
     }
 
     /**
