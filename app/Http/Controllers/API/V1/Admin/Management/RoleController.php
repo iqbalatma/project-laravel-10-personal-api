@@ -18,6 +18,11 @@ class RoleController extends Controller
 
     public function __construct()
     {
+        ddapi(ReplacementService::execute("Halo {target}, nama saya {name}. Umur saya {age}",[
+//            "target" => "Semua",
+//            "name" => "Iqbal",
+//            "age" => "2222",
+        ]));
         $this->responseMessages = [
             "index" => "Get all data role paginated successfully",
             "indexAll" => "Get all data role successfully",

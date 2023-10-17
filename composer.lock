@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbac37f72a67450244395cca899fd3ec",
+    "content-hash": "bbab201133253f4a8455baec70cf0fbe",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -1099,6 +1099,49 @@
                 "source": "https://github.com/iqbalatma/laravel-service-repo/tree/3.3.4"
             },
             "time": "2023-10-12T14:47:17+00:00"
+        },
+        {
+            "name": "iqbalatma/laravel-utils",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iqbalatma/laravel-utils.git",
+                "reference": "0f227fe880d040e907e9ca1dbe29f485ed811dee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iqbalatma/laravel-utils/zipball/0f227fe880d040e907e9ca1dbe29f485ed811dee",
+                "reference": "0f227fe880d040e907e9ca1dbe29f485ed811dee",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Iqbalatma\\LaravelUtils\\LaravelUtilProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Iqbalatma\\LaravelUtils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Iqbal Atma Muliawan",
+                    "email": "iqbalatma@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/iqbalatma/laravel-utils/issues",
+                "source": "https://github.com/iqbalatma/laravel-utils/tree/0.0.2"
+            },
+            "time": "2023-10-16T15:28:51+00:00"
         },
         {
             "name": "laravel/framework",
@@ -3231,16 +3274,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.21",
+            "version": "v0.11.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "bcb22101107f3bf770523b65630c9d547f60c540"
+                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/bcb22101107f3bf770523b65630c9d547f60c540",
-                "reference": "bcb22101107f3bf770523b65630c9d547f60c540",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/128fa1b608be651999ed9789c95e6e2a31b5802b",
+                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b",
                 "shasum": ""
             },
             "require": {
@@ -3269,7 +3312,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.11.x-dev"
+                    "dev-0.11": "0.11.x-dev"
                 },
                 "bamarni-bin": {
                     "bin-links": false,
@@ -3305,9 +3348,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.21"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.22"
             },
-            "time": "2023-09-17T21:15:54+00:00"
+            "time": "2023-10-14T21:56:36+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Backup;
 
-use App\Traits\MakeCommand;
 use Illuminate\Console\Command;
+use Iqbalatma\LaravelUtils\Traits\MakeCommand;
 
 class GenerateAbstract extends Command
 {
@@ -31,7 +31,7 @@ class GenerateAbstract extends Command
     public function handle(): void
     {
         $this->prepareMakeCommand(app_path("Contracts/Abstracts"), "App\\Contracts\\Abstracts")
-            ->generateFromStub(self::STUB_FILE_PATH);
+            ->generateFromStub();
     }
 
     protected function getStubVariables(): array

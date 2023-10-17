@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Backup;
 
-use App\Traits\MakeCommand;
 use Illuminate\Console\Command;
+use Iqbalatma\LaravelUtils\Traits\MakeCommand;
 
 class GenerateTrait extends Command
 {
@@ -30,7 +30,7 @@ class GenerateTrait extends Command
     public function handle():void
     {
         $this->prepareMakeCommand(app_path("Traits"), "App\\Traits")
-            ->generateFromStub(self::STUB_FILE_PATH);
+            ->generateFromStub();
     }
 
     protected function getStubVariables(): array

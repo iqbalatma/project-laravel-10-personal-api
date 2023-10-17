@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Backup;
 
-use App\Traits\MakeCommand;
 use Illuminate\Console\Command;
+use Iqbalatma\LaravelUtils\Traits\MakeCommand;
+
 class GenerateEnum extends Command
 {
     use MakeCommand;
@@ -30,7 +31,7 @@ class GenerateEnum extends Command
     public function handle():void
     {
         $this->prepareMakeCommand(app_path("Enums"), "App\\Enums")
-            ->generateFromStub(self::STUB_FILE_PATH);
+            ->generateFromStub();
     }
 
     /**
