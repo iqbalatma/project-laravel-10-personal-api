@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbab201133253f4a8455baec70cf0fbe",
+    "content-hash": "875b2f897f2102c9cd31130a84326c6c",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -106,6 +106,45 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "classid/template-replacement",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/classid/template-replacement.git",
+                "reference": "3b61084758335a7f4143338269d798b39420847e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/classid/template-replacement/zipball/3b61084758335a7f4143338269d798b39420847e",
+                "reference": "3b61084758335a7f4143338269d798b39420847e",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Classid\\TemplateReplacement\\TemplateReplacementProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Classid\\TemplateReplacement\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iqbal Atma Muliawan",
+                    "email": "iqbalatma@gmail.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/classid/template-replacement/tree/0.0.2",
+                "issues": "https://github.com/classid/template-replacement/issues"
+            },
+            "time": "2023-10-17T04:32:43+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

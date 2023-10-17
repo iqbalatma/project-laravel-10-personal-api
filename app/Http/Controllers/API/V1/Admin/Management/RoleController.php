@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\API\V1\Admin\Management;
 
-use App\Http\Controllers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Admin\Management\Roles\StoreRoleRequest;
 use App\Http\Requests\V1\Admin\Management\Roles\UpdateRoleRequest;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResource;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResourceCollection;
 use App\Services\Admin\Management\RoleService;
-use App\Services\GeneralReplacement\ReplacementService;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
+use Iqbalatma\LaravelUtils\APIResponse;
 
 class RoleController extends Controller
 {
@@ -18,11 +17,6 @@ class RoleController extends Controller
 
     public function __construct()
     {
-        ddapi(ReplacementService::execute("Halo {target}, nama saya {name}. Umur saya {age}",[
-//            "target" => "Semua",
-//            "name" => "Iqbal",
-//            "age" => "2222",
-        ]));
         $this->responseMessages = [
             "index" => "Get all data role paginated successfully",
             "indexAll" => "Get all data role successfully",
@@ -42,7 +36,7 @@ class RoleController extends Controller
 
         return $this->apiResponse(
             new RoleResourceCollection($response),
-            $this->getResponseMessage(__FUNCTION__)
+            $this->getResponseMessage(__FUNCTION__),
         );
     }
 
