@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
-use App\Http\Controllers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\AuthenticateRequest;
 use App\Http\Resources\V1\Auth\AuthenticateResource;
 use App\Services\Auth\AuthenticationService;
 use Illuminate\Http\Request;
+use Iqbalatma\LaravelUtils\APIResponse;
 use Throwable;
 
 class AuthenticationController extends Controller

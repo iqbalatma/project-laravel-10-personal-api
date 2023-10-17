@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API\V1\Admin\Management;
 
-use App\Http\Controllers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\Admin\Management\Users\UserResource;
 use App\Http\Resources\V1\Admin\Management\Users\UserResourceCollection;
 use App\Models\User;
 use App\Services\Admin\Management\UserService;
 use Illuminate\Http\Request;
+use Iqbalatma\LaravelUtils\APIResponse;
 
 class UserController extends Controller
 {
