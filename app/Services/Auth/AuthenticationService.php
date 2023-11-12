@@ -34,4 +34,20 @@ class AuthenticationService extends BaseService
             "user" => Auth::user()
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function refreshToken(): array
+    {
+        $refreshedToken = Auth::refreshToken(Auth::user());
+        return [
+            "token" => [
+                "access_token" => $refreshedToken["access_token"],
+                "refresh_token" => $refreshedToken["refresh_token"],
+                "type" => "Bearer"
+            ],
+            "user" => Auth::user()
+        ];
+    }
 }

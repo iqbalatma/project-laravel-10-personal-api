@@ -26,9 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix("v1")->name("v1.")->group(function () {
     Route::prefix("auth")->name("auth.")->controller(AuthenticationController::class)->group(function () {
         Route::post("", "authenticate")->name("authenticate");
+        Route::post("logout", "logout")->name("logout")->middleware("auth.jwt:access");
+        Route::post("refresh", "refresh")->name("refresh")->middleware("auth.jwt:refresh");
     });
 
-    Route::middleware("auth:api")->group(function () {
+    Route::middleware("auth.jwt")->group(function () {
         Route::prefix("admin")->name("admin.")->group(function () {
             Route::prefix("management")->name("management.")->group(function () {
                 Route::prefix("users")->name("users.")->controller(UserController::class)->group(function () {

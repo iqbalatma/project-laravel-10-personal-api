@@ -8,6 +8,7 @@ use App\Http\Resources\V1\Admin\Management\Users\UserResourceCollection;
 use App\Models\User;
 use App\Services\Admin\Management\UserService;
 use Illuminate\Http\Request;
+use Iqbalatma\LaravelJwtAuthentication\Services\IssuedTokenService;
 use Iqbalatma\LaravelUtils\APIResponse;
 
 class UserController extends Controller
@@ -28,7 +29,7 @@ class UserController extends Controller
     public function index(UserService $service): APIResponse
     {
         $response = $service->getAllDataPaginated();
-        return $this->apiResponse(
+        return new APIResponse(
             new UserResourceCollection($response),
             $this->getResponseMessage(__FUNCTION__)
         );

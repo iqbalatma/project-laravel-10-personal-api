@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72ae8d4ec8454fc26d2e0466b384e3a6",
+    "content-hash": "956e323413a5263a1dfd92f14a812327",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -1081,16 +1081,16 @@
         },
         {
             "name": "iqbalatma/laravel-jwt-authentication",
-            "version": "1.4.4",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iqbalatma/laravel-jwt-authentication.git",
-                "reference": "a20296ed0e73689a69c247f5983a38cdd0728e3c"
+                "reference": "b018925d54d25a70291f454a82d676d9bb844309"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iqbalatma/laravel-jwt-authentication/zipball/a20296ed0e73689a69c247f5983a38cdd0728e3c",
-                "reference": "a20296ed0e73689a69c247f5983a38cdd0728e3c",
+                "url": "https://api.github.com/repos/iqbalatma/laravel-jwt-authentication/zipball/b018925d54d25a70291f454a82d676d9bb844309",
+                "reference": "b018925d54d25a70291f454a82d676d9bb844309",
                 "shasum": ""
             },
             "require": {
@@ -1120,9 +1120,9 @@
             ],
             "support": {
                 "issues": "https://github.com/iqbalatma/laravel-jwt-authentication/issues",
-                "source": "https://github.com/iqbalatma/laravel-jwt-authentication/tree/1.4.4"
+                "source": "https://github.com/iqbalatma/laravel-jwt-authentication/tree/1.4.5"
             },
-            "time": "2023-11-12T15:46:54+00:00"
+            "time": "2023-11-12T17:13:54+00:00"
         },
         {
             "name": "iqbalatma/laravel-service-repo",
