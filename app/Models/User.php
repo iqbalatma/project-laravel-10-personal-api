@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Iqbalatma\LaravelJwtAuth\Contracts\Interfaces\JWTSubject;
+use Iqbalatma\LaravelJwtAuthentication\Interfaces\JWTSubject;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -80,11 +80,17 @@ class User extends Authenticatable implements JWTSubject
         );
     }
 
-    public function getJWTIdentifier()
+    /**
+     * @return int|string
+     */
+    public function getJWTIdentifier(): int|string
     {
         return $this->getKey();
     }
 
+    /**
+     * @return array
+     */
     public function getJWTCustomClaims():array
     {
         return [];

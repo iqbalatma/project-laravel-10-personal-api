@@ -1,7 +1,0 @@
-<?php
-
-namespace *NAMESPACE*;
-
-enum *ENUM_NAME* {
-
-}
