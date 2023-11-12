@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         foreach (Role::values() as $key => $role){
             \App\Models\Role::create([
                 "name" => $role,
-                "guard_name" => "api",
+                "guard_name" => "jwt",
                 "is_mutable" => false,
             ]);
         }

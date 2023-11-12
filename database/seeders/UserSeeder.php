@@ -49,6 +49,5 @@ class UserSeeder extends Seeder
         $userSuperadmin->assignRole(Role::SUPERADMIN->value);
 
         User::factory()->count(100)->create();
-
     }
 }

@@ -16,7 +16,7 @@ class PermissionSeeder extends Seeder
         foreach (Permission::values() as $key => $permission){
             \App\Models\Permission::create([
                 "name" => $permission,
-                "guard_name" => "api",
+                "guard_name" => "jwt",
             ]);
         }
     }
