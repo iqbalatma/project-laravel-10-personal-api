@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\V1\Admin\Management\Users;
+namespace App\Http\Resources\V1\Profiles;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @mixin User
  */
-class UserResource extends JsonResource
+class ProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\Admin\Management\PermissionController;
 use App\Http\Controllers\API\V1\Admin\Management\RoleController;
 use App\Http\Controllers\API\V1\Admin\Management\UserController;
 use App\Http\Controllers\API\V1\Auth\AuthenticationController;
+use App\Http\Controllers\API\V1\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,11 @@ Route::prefix("v1")->name("v1.")->group(function () {
                     Route::patch("{id}", "update")->name("update");
                 });
             });
+        });
+
+        Route::prefix("profiles")->name("profile.")->controller(ProfileController::class)->group(function (){
+           Route::get("", "show")->name("show");
+           Route::patch("", "update")->name("update");
         });
     });
 

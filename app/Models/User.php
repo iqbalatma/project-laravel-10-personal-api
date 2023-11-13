@@ -21,6 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string lastname
  * @property string fullname
  * @property string email
+ * @property string phone_number
  * @property string password
  * @property string email_verified_at
  * @property string remember_token
