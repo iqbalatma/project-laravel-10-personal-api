@@ -54,6 +54,7 @@ Route::prefix("v1")->name("v1.")->group(function () {
         Route::prefix("profiles")->name("profile.")->controller(ProfileController::class)->group(function (){
            Route::get("", "show")->name("show");
            Route::patch("", "update")->name("update");
+           Route::patch("password", "updatePassword")->name("update.password");
         });
     });
 
