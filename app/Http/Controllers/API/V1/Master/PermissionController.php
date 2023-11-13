@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Admin\Management;
+namespace App\Http\Controllers\API\V1\Master;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\Admin\Management\Permissions\PermissionResourceCollection;
-use App\Services\Admin\Management\PermissionService;
-use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
+use App\Http\Resources\V1\Master\PermissionResourceCollection;
+use App\Services\Master\PermissionService;
 use Iqbalatma\LaravelUtils\APIResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PermissionController extends Controller
 {
@@ -16,7 +14,7 @@ class PermissionController extends Controller
     public function __construct()
     {
         $this->responseMessages = [
-            "index" => "Get all data permission paginated successfully"
+            "__invoke" => "Get all data permission successfully",
         ];
     }
 
@@ -24,9 +22,9 @@ class PermissionController extends Controller
      * @param PermissionService $service
      * @return APIResponse
      */
-    public function index(PermissionService $service):APIResponse
+    public function __invoke(PermissionService $service):APIResponse
     {
-        $response = $service->getAllDataPaginated();
+        $response = $service->getAllData();
 
         return new APIResponse(
             new PermissionResourceCollection($response),

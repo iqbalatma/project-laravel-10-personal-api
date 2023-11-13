@@ -70,7 +70,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class, "id");
+        return $this->hasOne(Profile::class, "id", "id");
     }
 
     protected function fullname(): Attribute

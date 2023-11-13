@@ -50,5 +50,11 @@ Route::prefix("v1")->name("v1.")->group(function () {
             });
         });
     });
+
+
+    Route::prefix("master")->name("master.")->group(function (){
+       Route::get("roles", \App\Http\Controllers\API\V1\Master\RoleController::class);
+       Route::get("permissions", \App\Http\Controllers\API\V1\Master\PermissionController::class);
+    });
 });
 

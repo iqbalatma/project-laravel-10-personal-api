@@ -19,7 +19,6 @@ class RoleController extends Controller
     {
         $this->responseMessages = [
             "index" => "Get all data role paginated successfully",
-            "indexAll" => "Get all data role successfully",
             "show" => "Get data role by id successfully",
             "store" => "Add new data role successfully",
             "update" => "Update data role by id successfully",
@@ -34,7 +33,7 @@ class RoleController extends Controller
     {
         $response = $service->getAllDataPaginated();
 
-        return $this->apiResponse(
+        return new APIResponse(
             new RoleResourceCollection($response),
             $this->getResponseMessage(__FUNCTION__),
         );
@@ -50,7 +49,7 @@ class RoleController extends Controller
     {
         $response = $service->getDataBy($id);
 
-        return $this->apiResponse(
+        return new APIResponse(
             new RoleResource($response),
             $this->getResponseMessage(__FUNCTION__)
         );
@@ -66,7 +65,7 @@ class RoleController extends Controller
     {
         $response = $service->addNewData($request->validated());
 
-        return $this->apiResponse(
+        return new APIResponse(
             new RoleResource($response),
             $this->getResponseMessage(__FUNCTION__)
         );
@@ -83,7 +82,7 @@ class RoleController extends Controller
     {
         $response = $service->updateDataById($id, $request->validated());
 
-        return $this->apiResponse(
+        return new APIResponse(
             new RoleResource($response),
             $this->getResponseMessage(__FUNCTION__)
         );
