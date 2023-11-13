@@ -11,14 +11,6 @@ use Illuminate\Validation\UnauthorizedException;
 
 class ProfileService extends BaseService
 {
-    protected $repository;
-
-    public function __construct()
-    {
-        // $this->repository
-    }
-
-
     /**
      * @return User
      */
