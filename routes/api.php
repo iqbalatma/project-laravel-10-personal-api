@@ -51,17 +51,17 @@ Route::prefix("v1")->name("v1.")->group(function () {
             });
         });
 
-        Route::prefix("profiles")->name("profile.")->controller(ProfileController::class)->group(function (){
-           Route::get("", "show")->name("show");
-           Route::patch("", "update")->name("update");
-           Route::patch("password", "updatePassword")->name("update.password");
+        Route::prefix("profiles")->name("profile.")->controller(ProfileController::class)->group(function () {
+            Route::get("", "show")->name("show");
+            Route::patch("", "update")->name("update");
+            Route::patch("password", "updatePassword")->name("update.password");
         });
     });
 
 
-    Route::prefix("master")->name("master.")->group(function (){
-       Route::get("roles", \App\Http\Controllers\API\V1\Master\RoleController::class);
-       Route::get("permissions", \App\Http\Controllers\API\V1\Master\PermissionController::class);
+    Route::prefix("master")->name("master.")->group(function () {
+        Route::get("roles", \App\Http\Controllers\API\V1\Master\RoleController::class);
+        Route::get("permissions", \App\Http\Controllers\API\V1\Master\PermissionController::class);
     });
 });
 
