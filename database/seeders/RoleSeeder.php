@@ -26,5 +26,7 @@ class RoleSeeder extends Seeder
         foreach (Permission::values() as $permission){
             $roleAdmin->givePermissionTo($permission);
         }
+
+        \App\Models\Role::factory(1000)->create();
     }
 }

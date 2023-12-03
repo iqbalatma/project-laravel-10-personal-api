@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Admin\Management;
 
+use App\Http\Controllers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Admin\Management\Roles\StoreRoleRequest;
 use App\Http\Requests\V1\Admin\Management\Roles\UpdateRoleRequest;
@@ -9,7 +10,6 @@ use App\Http\Resources\V1\Admin\Management\Roles\RoleResource;
 use App\Http\Resources\V1\Admin\Management\Roles\RoleResourceCollection;
 use App\Services\Admin\Management\RoleService;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
-use Iqbalatma\LaravelUtils\APIResponse;
 
 class RoleController extends Controller
 {
